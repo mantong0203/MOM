@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "alias":"zhaomantong-mom",
+    "name": "mom",
+    "routes": [
+        {
+          "src": "^/static/(.*)",
+          "dest": "/static/$1"
+        },
+        {
+          "src": ".*",
+          "dest": "/index.html"
+        }
+    ]
+  }
