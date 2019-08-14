@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import AuthApiService from '../../services/auth-api-service'
+import TokenService from '../../services/token-service';
 
 class SignIn extends Component {
     state = {
-        email:'',
+        user_name:'',
         password:''
 
     }
@@ -12,26 +14,44 @@ class SignIn extends Component {
 
         })
     }
-    handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state)
-    }
+    
+    handleSubmitJwtAuth = ev => {
+        console.log(ev.target)
+        ev.preventDefault()
+        this.setState({ error: null })
+        const { user_name, password } = ev.target
+     
+        AuthApiService.postLogin({
+          user_name: user_name.value,
+          password: password.value,
+        })
+          .then(res => {
+            user_name.value = ''
+            password.value = ''
+            TokenService.saveAuthToken(res.authToken)
+            this.props.onLoginSuccess()
+          })
+          .catch(res => {
+            this.setState({ error: res.error })
+          })
+      }
     render() {
         return (
             <div className="container">
-                <form className="white" onSubmit={this.handleSubmit} ></form>
+                <form className="white" onSubmit={this.handleSubmitJwtAuth} >
                 <h5 className="grey-text text-darken-3">Sign In</h5>
                 <div className="input-field">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" onChange={this.handleChange}/>
+                    <label htmlFor="user_name">User Name</label>
+                    <input name='user_name' type="text" id="user_name" onChange={this.handleChange}/>
                 </div>
                 <div className="input-field">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" onChange={this.handleChange}/>
+                    <input name='password' type="password" id="password" onChange={this.handleChange}/>
                 </div>
                 <div className="input-filed">
                     <button className="btn pink lighten-1 z-depth-0">LOGIN</button>
                 </div>
+                </form>
             </div>
         )
     }

@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ProjectSummary = () =>{
+const AgendaSummary = ({agenda}) =>{
     return (
-        <div className="card z-depth-0 project-summary">
+        <div className="card z-depth-0 agenda-summary">
                 <div className="card-content grey-text text-darken-3">
-                    <span className="card-title">Project Title</span>
+                    <span className="card-title">{agenda.title}</span>
                     <p>Posted by the </p>
                     <p className="grey-text">3rd September</p>
                 </div>
@@ -12,4 +12,4 @@ const ProjectSummary = () =>{
     )
 }
 
-export default ProjectSummary
+export default AgendaSummary
