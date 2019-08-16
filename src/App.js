@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
-import PrivateRoute from '../Utils/PrivateRoute'
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
+//import PrivateRoute from './components/utils/PrivateRoute.js'
+//import PublicOnlyRoute from './components/utils/PublicOnlyRoute'
 import Dashboard from './components/dashboard/Dashboard'
 import AgendaDetails from './components/agendas/AgendaDetails'
 import SignIn from './components/auth/SignIn'
@@ -82,9 +82,9 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <PublicOnlyRoute path='/login' component={SignIn} />
-            <PublicOnlyRoute path='/signup' component={SignUp} />
-            <PrivateRoute path='/agenda/:agendaid' component={AgendaDetails} />
+            <Route path='/login' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+            <Route path='/agenda/:agendaid' component={AgendaDetails} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>  
