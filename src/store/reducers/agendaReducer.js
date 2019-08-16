@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 const initState ={
     agendas:[
         {id:'1',title:'pick up kids',content:'pick up kids after school'},

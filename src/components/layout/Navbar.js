@@ -2,8 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
+import { connect } from 'react-redux'
 
-const Navbar = () => {
+class Navbar extends React.Component {
+   render(){
+    //const {agenda} = this.props
     return (
         <nav className="Nav-wrapper grey daren-3">
             
@@ -16,5 +19,11 @@ const Navbar = () => {
   
     )
 }
-
-export default Navbar
+}
+const mapStateToProps = (state) =>{
+    console.log(state);
+    return{
+       agenda:state.agenda
+    }
+}
+export default connect(mapStateToProps)(Navbar)

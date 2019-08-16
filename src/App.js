@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import PrivateRoute from '../Utils/PrivateRoute'
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
 import Dashboard from './components/dashboard/Dashboard'
 import AgendaDetails from './components/agendas/AgendaDetails'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-import CreateAgenda from './components/agendas/CreateAgenda'
+//import CreateAgenda from './components/agendas/CreateAgenda'
 import TokenService from './services/token-service'
 import AuthApiService from './services/auth-api-service'
 import IdleService from './services/idle-service'
@@ -75,15 +77,17 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+        <main className='App__main'>
+          {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}  
           <Navbar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/agenda/:id' component={AgendaDetails} />
-            <Route path='/login' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-            <Route path='/agendas' component={CreateAgenda} />
+            <PublicOnlyRoute path='/login' component={SignIn} />
+            <PublicOnlyRoute path='/signup' component={SignUp} />
+            <PrivateRoute path='/agenda/:agendaid' component={AgendaDetails} />
             <Route component={NotFoundPage} />
           </Switch>
+        </main>  
         </div>
       </BrowserRouter>
     );

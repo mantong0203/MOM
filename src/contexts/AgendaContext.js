@@ -38,7 +38,12 @@ export class AgendaProvider extends Component {
   clearAgenda = () => {
     this.setAgenda(nullAgenda)
   }
-
+  addAgenda = agenda => {
+    this.setAgendas([
+      ...this.state.agendas,
+      agenda
+    ])
+  }
   render() {
     const value = {
       agenda: this.state.agenda,
