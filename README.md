@@ -10,3 +10,4 @@ Mom is an application that moms could make agendas on a daily basis.
 
 - Start the application for development: `npm start`
 
+![firstPage.png](./firstPage.png)
