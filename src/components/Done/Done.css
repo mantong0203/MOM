@@ -1,8 +1,8 @@
-.AgendaForm select, .AgendaForm label {
+.Done select, .Done label {
     font-size: 1.1em;
   }
   
-  .AgendaForm label {
+  .Done label {
     display: inline-block;
     margin: 10px 10px 20px;
     margin-left: 0;

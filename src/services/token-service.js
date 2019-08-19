@@ -21,8 +21,11 @@ const TokenService = {
   makeBasicAuthToken(userName, password) {
     return window.btoa(`${userName}:${password}`)
   },
+ 
   parseJwt(jwt) {
+    
     return jwtDecode(jwt)
+  
   },
   readJwtToken() {
     return TokenService.parseJwt(TokenService.getAuthToken())

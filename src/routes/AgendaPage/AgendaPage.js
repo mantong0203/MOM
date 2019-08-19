@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import AgendaListContext from '../../contexts/AgendaListContext'
-import AgendaItem from '../../components/AgendaItem/AgendaItem'
+import Done from '../../components/Done/Done'
 import TokenService from '../../services/token-service'
 import config from '../../config'
 
 
-export default class AcceptedAgendas extends Component {
+export default class AgendaPage extends Component {
     static contextType = AgendaListContext;
 
     componentDidMount() {
@@ -28,7 +28,7 @@ export default class AcceptedAgendas extends Component {
                 <h2>Agendas</h2>
                 <ul className='AgendaList_list' aria-live='polite'>
                     {acceptedAgendas.map(agenda =>
-                        <AgendaItem key={agenda.id} {...agenda} />
+                        <Done key={agenda.id} {...agenda} />
                     )}
                 </ul>
             </section>

@@ -29,13 +29,11 @@ const AgendaApiService = {
   postAgenda(agenda) {
     return fetch(`${config.API_ENDPOINT}/agendas`, {
       method: 'POST',
+      body: JSON.stringify(agenda),
       headers: {
         'content-type': 'application/json',
         'authorization':`bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
-        agenda
-      }),
     })
       .then(res =>
         (!res.ok)

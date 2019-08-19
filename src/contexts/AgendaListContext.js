@@ -56,7 +56,7 @@ export class AgendaListProvider extends Component {
     })
 }
 
-  fetchAgendas() {
+  fetchAgendas=()=> {
       fetch(`${config.API_ENDPOINT}/agendas`, {
           method: 'GET',
           headers: {
@@ -72,6 +72,7 @@ export class AgendaListProvider extends Component {
               return res.json()
           })
           .then(this.setAgendaList)
+          .catch(error => this.setState({ error }))
   }
 
   setError = error => {
@@ -84,7 +85,7 @@ export class AgendaListProvider extends Component {
   }
 
   render() {
-    const value = {
+    const contextValue = {
       agendaList: this.state.agendaList,
       error: this.state.error,
       addAgenda: this.addAgenda,
@@ -96,7 +97,7 @@ export class AgendaListProvider extends Component {
       fetchAgendas: this.fetchAgendas,
     }
     return (
-      <AgendaListContext.Provider value={value}>
+      <AgendaListContext.Provider value={contextValue}>
         {this.props.children}
       </AgendaListContext.Provider>
     )

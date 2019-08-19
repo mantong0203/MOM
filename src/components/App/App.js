@@ -3,8 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
 import PrivateRoute from '../Utils/PrivateRoute'
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
-import WeekdayListPage from '../../routes/WeekdayListPage/WeekdayListPage'
-import WeekdayPage from '../../routes/WeekdayPage/WeekdayPage'
+import AgendaListPage from '../../routes/AgendaListPage/AgendaListPage'
+import AddAgenda from '../AddAgenda/AddAgenda'
+import AgendaPage from '../../routes/AgendaPage/AgendaPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
@@ -16,10 +17,6 @@ import './App.css'
 class App extends Component {
   state = { hasError: false }
 
-  static getDerivedStateFromError(error) {
-    console.error(error)
-    return { hasError: true }
-  }
   componentDidMount() {
     /*
       set the function (callback) to call when a user goes idle
@@ -77,29 +74,23 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App__header'>
-          <Header />
-          
+          <Header />       
         </header>
         <main className='App__main'>
           {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}
           <Switch>
-            <Route
+            <PublicOnlyRoute
               exact
               path={'/'}
-              component={WeekdayListPage}
-            />
+              component={RegistrationPage}
+            /> 
             <PublicOnlyRoute
               path={'/login'}
               component={LoginPage}
-            />
-            <PublicOnlyRoute
-              path={'/register'}
-              component={RegistrationPage}
-            />          
-            <PrivateRoute
-              path={'/weekday/:weekdayId'}
-              component={WeekdayPage}
-            />
+            />              
+            <Route path={'/agendas'} component={AgendaListPage} />
+            <Route path={'/done'} component={AgendaPage} />
+            <PrivateRoute path={'/add-agenda'} component={AddAgenda} />
             <Route
               component={NotFoundPage}
             />

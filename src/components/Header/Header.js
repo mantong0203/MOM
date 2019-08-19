@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TokenService from '../../services/token-service'
 import IdleService from '../../services/idle-service'
+import AgendaContext from '../../contexts/AgendaContext'
 import './Header.css'
 
 export default class Header extends Component {
+  static contextType = AgendaContext
+
   handleLogoutClick = () => {
+    const { logOutUser } = this.context
+        logOutUser()
     TokenService.clearAuthToken()
       /* when logging out, clear the callbacks to the refresh api and idle auto logout */
       TokenService.clearCallbackBeforeExpiry()
@@ -16,16 +21,24 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div className='Header__logged-in'>
-        <Link
+      <Link to='/add-agenda' id='link'>
+          Add Agenda
+      </Link>
+      {' '}
+      <Link to='/agendas' id='link'>
+          Todo
+      </Link>
+      {' '}
+      <Link to='/done' id='link'>
+           Done
+      </Link>
+      {' '}
+      <Link
           onClick={this.handleLogoutClick}
-          to='/'>
+          to='/' id='link'>
           Logout
-        </Link>
-        <Link
-          to='/profile'>
-          Save
-        </Link>
-      </div>
+      </Link>
+  </div>
     )
   }
 
@@ -33,33 +46,41 @@ export default class Header extends Component {
     return (
       <div className='Header__not-logged-in'>
         <Link
-          to='/login'>
+          to='/login' id='link'>
           Log in
         </Link>
         <Link
-          to='/register'>
+          to='/' id='link'>
           Register
         </Link>
         
       </div>
     )
   }
-
+  componentDidMount() {
+    const { logInUser } = this.context
+    if (TokenService.hasAuthToken()) {
+        logInUser()
+    }
+}
   render() {
-    return <>
-      <nav className='Header'>
+    const { loggedIn } = this.context
+    return (
+    <>
+      <div className='Header'>
         <h1>
-          <Link to='/'>
-            <FontAwesomeIcon className='blue' icon='frog' />
+          <Link to='/' id='link'>
+            <FontAwesomeIcon className='pink' icon='calendar' />
             {' '}
             MOM
           </Link>
         </h1>
-        {TokenService.hasAuthToken()
+        {loggedIn === true
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
-      </nav>
+      </div>
 
     </>
+    )
   }
 }

@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas, faCalendar, faListUl, faListOl, faPenAlt, faGlobeAmericas, faBookOpen, faCalendarCheck, faQuoteLeft } from '@fortawesome/free-solid-svg-icons'
 import './index.css';
 import { AgendaListProvider } from './contexts/AgendaListContext'
 import { AgendaProvider } from './contexts/AgendaContext'
-import App from './App';
+import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
-
+library.add(
+    fas,
+    
+    faCalendar, // logo
+    faListUl, // style: listicle
+    faListOl, // style: howto
+    faGlobeAmericas, // style: news
+    faPenAlt, // style: interview
+    faBookOpen, // style: story
+    faCalendarCheck,
+    faQuoteLeft,
+  )
 ReactDOM.render(
     <BrowserRouter>
         <AgendaListProvider>
