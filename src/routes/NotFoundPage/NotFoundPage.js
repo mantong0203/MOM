@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Section } from '../Utils/Utils'
+import { Section } from '../../components/Utils/Utils'
 
 export default class NotFoundPage extends Component {
-  
-    render() {
+  render() {
     return (
       <Section className='NotFoundPage'>
         <h2>404 - Page not found</h2>

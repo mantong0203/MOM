@@ -15,7 +15,6 @@ const AgendaApiService = {
       )
   },
   getAgenda(agendaId) {
-    
       return fetch(`${config.API_ENDPOINT}/agendas/${agendaId}`, {
         headers: {
           'authorization':`bearer ${TokenService.getAuthToken()}`,
@@ -27,7 +26,7 @@ const AgendaApiService = {
             : res.json()
         )
   },
-  postAgenda(agendaId, title, content) {
+  postAgenda(agenda) {
     return fetch(`${config.API_ENDPOINT}/agendas`, {
       method: 'POST',
       headers: {
@@ -35,9 +34,7 @@ const AgendaApiService = {
         'authorization':`bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        agenda_id: agendaId,
-        title,
-        content,
+        agenda
       }),
     })
       .then(res =>
@@ -46,19 +43,6 @@ const AgendaApiService = {
           : res.json()
       )
   },
-  // saveAgenda(agendaId, newAgenda){
-  //   return fetch(`${config.API_ENDPOINT}/agendas/${agendaId}`, {
-  //     method: "POST",
-  //     headers: { "content-type": "application/json",'authorization': `bearer ${TokenService.getAuthToken()}`
-  //   },
-  //     body: JSON.stringify(newAgenda) 
-  //   })
-  //     .then(res=>
-  //       !res.ok ? res.json().then(e=> Promise.reject(e)): res.json()
-  //       )
-      
-  //   },
-  
 
 }
 

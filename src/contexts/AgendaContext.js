@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 
 export const nullAgenda = {
-  author: {},
+  user: {},
   tags: [],
 }
 
 const AgendaContext = React.createContext({
   agenda: nullAgenda,
+  loggedIn: false,
   error: null,
   setError: () => {},
   clearError: () => { },
   setAgenda: () => {},
   clearAgenda: () => {},
+  updateAgenda: () => { },
 })
 
 export default AgendaContext
@@ -19,6 +21,7 @@ export default AgendaContext
 export class AgendaProvider extends Component {
   state = {
     agenda: nullAgenda,
+    loggedIn: false,
     error: null,
   };
 
@@ -38,22 +41,25 @@ export class AgendaProvider extends Component {
   clearAgenda = () => {
     this.setAgenda(nullAgenda)
   }
-  addAgenda = agenda => {
-    this.setAgendas([
-      ...this.state.agendas,
-      agenda
-    ])
+  logInUser = () => {
+    this.setState({ loggedIn: true })
   }
+
+  logOutUser = () => {
+    this.setState({ loggedIn: false })
+  }
+
   render() {
     const value = {
       agenda: this.state.agenda,
+      loggedIn: this.state.loggedIn,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
       setAgenda: this.setAgenda,
-      
       clearAgenda: this.clearAgenda,
-     
+      logInUser: this.logInUser,
+      logOutUser: this.logOutUser,
     }
     return (
       <AgendaContext.Provider value={value}>
