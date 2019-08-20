@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AgendaListContext from '../../contexts/AgendaListContext';
+import { Section } from '../../components/Utils/Utils'
 import './Done.css';
 
 export default class Done extends Component {
@@ -9,10 +10,10 @@ export default class Done extends Component {
         return (
             <AgendaListContext.Consumer>
                 {(context) => (
-                    <div className='AgendaItem'>
-                        <h2 className='AgendaItem_title' id="gold">{this.props.title}</h2>
-                        <h3 className='AgendaItem_content' id="gold">{this.props.content}</h3>
-                    </div>
+                    <Section className='container'>
+                        <h4 className='AgendaItem_title' id="gold">Title: {this.props.title}</h4>
+                        <h5 className='AgendaItem_content' id="gold">Content: {this.props.content}</h5>
+                    </Section>
                 )}
             </AgendaListContext.Consumer>
         )

@@ -27,7 +27,7 @@ export default class AddAgenda extends Component {
         const agenda = {
             title: this.state.title,
             content: this.state.content,
-            user_id: parsedJwtPayload.user_id,
+            //user_id: parsedJwtPayload.user_id,
         }
 
         this.setState({ error: null })
@@ -35,8 +35,9 @@ export default class AddAgenda extends Component {
         AgendaApiService.postAgenda(agenda)
             .then(data => {
                 this.setState({
-                    title: '',
                     content:'',
+                    title: '',
+                    
                 })
                 this.context.addAgenda(data)
                 this.props.history.push('/agendas')

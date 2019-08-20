@@ -20,11 +20,11 @@ export default class AgendaItem extends Component {
 
 
     updateAgendaActive = (agenda) => {
-        let parsedJwtToken = this.parseJwt(localStorage.getItem(config.JWT_TOKEN))
+        //let parsedJwtToken = this.parseJwt(localStorage.getItem(config.JWT_TOKEN))
 
         fetch(`${config.API_ENDPOINT}/agendas/${agenda.id}`, {
             method: 'PATCH',
-            body: JSON.stringify({ active: false, claim_user: parsedJwtToken.user_id }),
+            body: JSON.stringify({ active: false }),
             headers: {
                 'content-type': 'application/json',
                 'authorization': `bearer ${TokenService.getAuthToken()}`
@@ -48,9 +48,15 @@ export default class AgendaItem extends Component {
         return (
             <AgendaListContext.Consumer>
                 {(context) => (
+
                     <div className='AgendaItem'>
-                        <h2 className='AgendaItem_title'>{this.props.title}</h2>
-                        <h3 className='AgendaItem_content'>{this.props.content}</h3>
+                         <div className='TradeItem_middle'>
+                               
+                                <button type='Button' id='Accept' onClick={() => this.updateAgendaActive(this.props)}><span>Check</span></button>
+                         </div>
+                        <h4 className='AgendaItem_title'>Title: {this.props.title}</h4>
+
+                        <h5 className='AgendaItem_content'>Content: {this.props.content}</h5>
                     </div>
                 )}
             </AgendaListContext.Consumer>

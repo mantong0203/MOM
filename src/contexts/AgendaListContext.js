@@ -56,7 +56,7 @@ export class AgendaListProvider extends Component {
     })
 }
 
-  fetchAgendas=()=> {
+  fetchAgendas() {
       fetch(`${config.API_ENDPOINT}/agendas`, {
           method: 'GET',
           headers: {

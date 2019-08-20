@@ -18,7 +18,7 @@ export default class RegistrationForm extends Component {
     user_name: user_name.value,
     password: password.value,
     full_name: full_name.value,
-    nickname: nick_name.value,
+    
      })
        .then(user => {
           full_name.value = ''
@@ -75,17 +75,7 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__password'>
           </Input>
         </div>
-        <div className='nick_name'>
-          <label htmlFor='RegistrationForm__nick_name'>
-            Nickname
-          </label>
-          <Input
-            name='nick_name'
-            type='text'
-            //required
-            id='RegistrationForm__nick_name'>
-          </Input>
-        </div>
+        
         <Button type='submit'>
           Register
         </Button>
