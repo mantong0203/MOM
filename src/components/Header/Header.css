@@ -48,7 +48,7 @@
     border-radius: 15px;
   }
   
-  @media screen and (min-width: 450px) {
+  @media screen and (min-width: 360px) {
     .Header {
       align-items: baseline;
     }
